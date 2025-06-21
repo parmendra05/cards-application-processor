@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: cards-application-processor
+
+  cassandra:
+    port: 9042
+    contact-points: mycassandra
+    local-datacenter: datacenter1
+    keyspace-name: cards
+    schema-action: create_if_not_exists
+
+
+
+

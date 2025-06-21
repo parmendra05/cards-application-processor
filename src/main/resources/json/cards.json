@@ -1,0 +1,35 @@
+{
+  "cardDetails": {
+    "cardId": "TRAVEL-001",
+    "cardType": "TRAVEL"
+  },
+  "personalInformation": {
+    "fullName": {
+      "firstName": "William",
+      "middleName": "T",
+      "lastName": "Preston"
+    },
+    "dateOfBirth": "1985-05-15",
+    "socialSecurityNumber": "589-12-3456",
+    "contactInformation": {
+      "residentialAddress": {
+        "street": "456 Corporate Blvd",
+        "city": "Springfield",
+        "state": "IL",
+        "zipCode": "62704"
+      },
+      "phoneNumbers": [
+        {
+          "type": "mobile",
+          "number": "555-987-6543"
+        }
+      ]
+    }
+  },
+  "financialInformation": {
+    "incomeDetails": {
+      "grossAnnualIncome": 125000,
+      "additionalIncome": 15000
+    }
+  }
+}

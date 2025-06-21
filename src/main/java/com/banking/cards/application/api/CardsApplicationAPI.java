@@ -1,25 +1,29 @@
 package com.banking.cards.application.api;
 
-import com.banking.cards.application.model.PersonalInformation;
+import com.banking.cards.application.handler.exception.ResourceNotFoundException;
 import com.banking.cards.application.model.request.ApplicationRequest;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.banking.cards.application.service.CardsApplicationService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 
 @RestController
 @RequestMapping("v1/card-applications")
 @Slf4j
+@RequiredArgsConstructor
 public class CardsApplicationAPI {
+
+    private final CardsApplicationService cardsApplicationService;
 
     @PostMapping
     public void  createApplication(@RequestBody @Valid ApplicationRequest applicationRequest) {
-        log.info("Creating application request: {}", applicationRequest);
+        this.cardsApplicationService.createApplication(applicationRequest);
     }
+
+
 
 }
