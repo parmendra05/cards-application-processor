@@ -6,5 +6,6 @@ import com.banking.cards.application.model.PersonalInformation;
 public class CardsApplicationUtility {
     public static PersonalInformationEntity convertPersonalInformationToPersonalInformationEntity(PersonalInformation personalInformation) {
         // Status -> PENDING
+        return null;
     }
 }
