@@ -21,5 +21,6 @@ public class PersonalInformation {
     private String socialSecurityNumber;
     @Valid
     private ContactInformation contactInformation;
+    private String correlationId;
 
 }

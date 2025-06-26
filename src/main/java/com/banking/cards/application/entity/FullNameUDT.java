@@ -1,10 +1,7 @@
 package com.banking.cards.application.entity;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 
 @Getter
@@ -12,6 +9,7 @@ import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 @NoArgsConstructor
 @AllArgsConstructor
 @UserDefinedType(value = "full_name")
+@Builder
 public class FullNameUDT {
     private String firstName;
     private String middleName;

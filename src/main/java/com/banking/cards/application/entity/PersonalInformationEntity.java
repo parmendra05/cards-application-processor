@@ -4,10 +4,7 @@ import com.banking.cards.application.model.ContactInformation;
 import com.banking.cards.application.model.FullName;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
@@ -18,7 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Builder
 @Table(value = "personal_information")
 public class PersonalInformationEntity {
     @PrimaryKey
@@ -32,4 +29,6 @@ public class PersonalInformationEntity {
     private List<PhoneNumberUDT> phoneNumbers;
     @Column
     private String status;
+    private String correlationId;
+    private String applicationStatus;
 }
