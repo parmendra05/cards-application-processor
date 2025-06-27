@@ -24,6 +24,7 @@ public class CardsApplicationAPI {
     public void  createApplication(@RequestBody @Valid ApplicationRequest applicationRequest, HttpServletRequest request) {
         applicationRequest.getPersonalInformation().setCorrelationId((String) request.getAttribute("correlationId"));
         // Write a logger logging about application start process, with user name and correlation
+        //new line added
         this.cardsApplicationService.createApplication(applicationRequest);
     }
 
