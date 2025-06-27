@@ -1,6 +1,6 @@
 spring:
   application:
-    name: cards-application-processor
+    name: cards-application-processor1
 
   cassandra:
     port: 9042
