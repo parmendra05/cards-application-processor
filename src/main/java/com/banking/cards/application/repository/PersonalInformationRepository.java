@@ -5,4 +5,5 @@ import com.banking.cards.application.entity.PersonalInformationEntity;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 
 public interface PersonalInformationRepository extends CassandraRepository<PersonalInformationEntity, PersonalCardKey> {
+    PersonalInformationEntity findByCorrelationId(String correlationId);
 }

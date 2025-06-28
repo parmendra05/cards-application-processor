@@ -1,16 +1,13 @@
 package com.banking.cards.application.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @UserDefinedType(value = "phone_number")
+@Builder
 public class PhoneNumberUDT {
     private String type;
     private String number;

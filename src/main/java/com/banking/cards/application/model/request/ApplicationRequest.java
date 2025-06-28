@@ -5,14 +5,11 @@ import com.banking.cards.application.model.ContactInformation;
 import com.banking.cards.application.model.FinancialInformation;
 import com.banking.cards.application.model.PersonalInformation;
 import jakarta.validation.Valid;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
-@Setter
-@Getter
+@Data
+@Builder
 public class ApplicationRequest {
-
     @NonNull
     @Valid
     private CardDetails cardDetails;
@@ -23,5 +20,6 @@ public class ApplicationRequest {
     @NonNull
     private FinancialInformation financialInformation;
 
+    private String correlationId;
 
 }

@@ -28,7 +28,9 @@ public class PersonalInformationEntity {
     @Column
     private List<PhoneNumberUDT> phoneNumbers;
     @Column
-    private String status;
     private String correlationId;
+    @Column
     private String applicationStatus;
+    @Column
+    private List<String> comments;
 }
