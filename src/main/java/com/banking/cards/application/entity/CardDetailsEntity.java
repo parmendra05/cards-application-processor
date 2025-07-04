@@ -19,3 +19,4 @@ public class CardDetailsEntity {
     @Column(value = "cardtype")
     private String cardType;
 }
+//parmendra
