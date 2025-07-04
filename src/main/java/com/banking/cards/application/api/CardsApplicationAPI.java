@@ -29,9 +29,9 @@ public class CardsApplicationAPI {
     public ResponseEntity<ApiResponse<TrackingID>>  createApplication(@RequestBody @Valid ApplicationRequest applicationRequest, HttpServletRequest request) {
         applicationRequest.setCorrelationId((String) request.getAttribute("correlationId"));
         // Write a logger logging about application start process, with user name and correlation
+        log.info("Starting application creation process. User: {}, CorrelationId: {}", applicationRequest.getPersonalInformation().getFullName(), applicationRequest.getCorrelationId());
 
         return new ResponseEntity<ApiResponse<TrackingID>>(this.cardsApplicationService.createApplication(applicationRequest), HttpStatus.CREATED);
-
 
     }
 

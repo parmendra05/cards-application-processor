@@ -3,13 +3,9 @@ package com.banking.cards.application.utility;
 import com.banking.cards.application.entity.*;
 import com.banking.cards.application.model.FinancialInformation;
 import com.banking.cards.application.model.PersonalInformation;
-import com.banking.cards.application.model.PhoneNumber;
 import com.banking.cards.application.model.request.ApplicationRequest;
-import javafx.application.Application;
 
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class CardsApplicationUtility {

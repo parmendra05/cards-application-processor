@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper-1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    volumes:
+      # These are the lines you need to check
+      - zookeeper_data:/var/lib/zookeeper/data
+      - zookeeper_log:/var/lib/zookeeper/log # Make sure this one exists and is correct
+      # If you're using a different log path in ZooKeeper config, update this
+volumes:
+  zookeeper_data: # Definition for the data volume
+  zookeeper_log:  # Definition for the log volume
