@@ -1,5 +1,6 @@
 package com.banking.cards.application.api;
 
+import com.banking.cards.application.avro.ApplicationDataAvro;
 import com.banking.cards.application.handler.exception.ResourceNotFoundException;
 import com.banking.cards.application.model.request.ApplicationRequest;
 import com.banking.cards.application.model.response.ApiResponse;

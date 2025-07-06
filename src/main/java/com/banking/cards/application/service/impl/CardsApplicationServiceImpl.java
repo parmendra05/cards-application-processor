@@ -1,6 +1,6 @@
 package com.banking.cards.application.service.impl;
 
-import com.banking.cards.application.entity.FullNameUDT;
+import com.banking.cards.application.avro.ApplicationDataAvro;
 import com.banking.cards.application.entity.PersonalCardKey;
 import com.banking.cards.application.entity.PersonalInformationEntity;
 import com.banking.cards.application.handler.exception.ResourceNotFoundException;
@@ -13,14 +13,10 @@ import com.banking.cards.application.repository.FinancialInformationRepository;
 import com.banking.cards.application.repository.PersonalInformationRepository;
 import com.banking.cards.application.service.CardsApplicationService;
 import com.banking.cards.application.utility.CardsApplicationUtility;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.UUID;
-import java.util.function.Supplier;
 
 @Service
 @RequiredArgsConstructor

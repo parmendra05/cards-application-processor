@@ -1,0 +1,13 @@
+{
+  "namespace": "com.banking.cards.application.avro",
+  "type": "record",
+  "name": "ApplicationDataAvro",
+  "version": 1,
+  "fields": [
+    { "name": "correlationID", "type": "string"},
+    { "name": "dateOfBirth", "type": "string"},
+    { "name": "socialSecurityNumber", "type": "string"},
+    { "name": "grossAnnualIncome", "type": "double"},
+    { "name": "cardType", "type": "string"}
+  ]
+}
