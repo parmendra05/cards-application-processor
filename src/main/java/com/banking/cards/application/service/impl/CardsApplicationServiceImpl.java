@@ -4,6 +4,7 @@ import com.banking.cards.application.avro.ApplicationDataAvro;
 import com.banking.cards.application.entity.PersonalCardKey;
 import com.banking.cards.application.entity.PersonalInformationEntity;
 import com.banking.cards.application.handler.exception.ResourceNotFoundException;
+import com.banking.cards.application.kafka.publisher.CardsApplicationSubmitPublisher;
 import com.banking.cards.application.model.request.ApplicationRequest;
 import com.banking.cards.application.model.response.ApiResponse;
 import com.banking.cards.application.model.response.TrackingID;
@@ -26,6 +27,7 @@ public class CardsApplicationServiceImpl implements CardsApplicationService {
     private final CardDetailsRepository cardDetailsRepository;
     private final PersonalInformationRepository personalInformationRepository;
     private final FinancialInformationRepository financialInformationRepository;
+    private final CardsApplicationSubmitPublisher cardsApplicationSubmitPublisher;
 
     @Override
     @Transactional
@@ -39,7 +41,7 @@ public class CardsApplicationServiceImpl implements CardsApplicationService {
         }
         this.personalInformationRepository.save(CardsApplicationUtility.convertPersonalInformationToPersonalInformationEntity(applicationRequest));
         this.financialInformationRepository.save(CardsApplicationUtility.convertFinancialInformationToFinancialInformationEntity(applicationRequest));
-        //Publish the data to Kafka Topic (Setup a docker for Kafka Cluster and Schema Registry for Avro)
+        this.cardsApplicationSubmitPublisher.publishApplicationSubmitEvent(CardsApplicationUtility.mapToApplicationDataAvro(applicationRequest));
 
         return ApiResponse.<TrackingID>builder()
                 .data(TrackingID.builder().trackingID(applicationRequest.getCorrelationId()).build())

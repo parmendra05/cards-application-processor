@@ -1,5 +1,6 @@
 package com.banking.cards.application.utility;
 
+import com.banking.cards.application.avro.ApplicationDataAvro;
 import com.banking.cards.application.entity.*;
 import com.banking.cards.application.model.FinancialInformation;
 import com.banking.cards.application.model.PersonalInformation;
@@ -57,5 +58,15 @@ public class CardsApplicationUtility {
                      .grossAnnualIncome(financialInformation.getIncomeDetails().getGrossAnnualIncome())
                      .build())
              .build();
+    }
+
+    public static ApplicationDataAvro mapToApplicationDataAvro(ApplicationRequest applicationRequest){
+        return ApplicationDataAvro.newBuilder()
+                .setCardType(applicationRequest.getCardDetails().getCardType())
+                .setCorrelationID(applicationRequest.getCorrelationId())
+                .setDateOfBirth(applicationRequest.getPersonalInformation().getDateOfBirth())
+                .setSocialSecurityNumber(applicationRequest.getPersonalInformation().getSocialSecurityNumber())
+                .setGrossAnnualIncome(applicationRequest.getFinancialInformation().getIncomeDetails().getGrossAnnualIncome())
+                .build();
     }
 }

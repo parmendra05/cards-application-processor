@@ -9,6 +9,8 @@ spring:
     keyspace-name: cards
     schema-action: create_if_not_exists
     #schema-action
-
+topics:
+  application-submitted-event: vnd_cards_application_submitted_event
+  application-validated-event: vnd_cards_application_validated_event
 
 
