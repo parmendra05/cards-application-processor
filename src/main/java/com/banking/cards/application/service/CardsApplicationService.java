@@ -10,5 +10,5 @@ import java.util.UUID;
 
 public interface CardsApplicationService {
     ApiResponse<TrackingID> createApplication(ApplicationRequest applicationRequest);
-    TrackingResponse getApplication(TrackingID trackingId) throws ResourceNotFoundException;
+    TrackingResponse getApplication(String trackingId) throws ResourceNotFoundException;
 }

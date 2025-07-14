@@ -9,9 +9,15 @@ spring:
     keyspace-name: cards
     schema-action: create_if_not_exists
   kafka:
+    bootstrap-servers:
+      - "localhost:19092"
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        schema:
+          registry:
+            url: "http://localhost:8081"
 topics:
   application-submitted-event: vnd_cards_application_submitted_event
   application-validated-event: vnd_cards_application_validated_event

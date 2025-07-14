@@ -2,6 +2,7 @@ package com.banking.cards.application.api;
 
 import com.banking.cards.application.avro.ApplicationDataAvro;
 import com.banking.cards.application.handler.exception.ResourceNotFoundException;
+import com.banking.cards.application.kafka.publisher.CardsApplicationSubmitPublisher;
 import com.banking.cards.application.model.request.ApplicationRequest;
 import com.banking.cards.application.model.response.ApiResponse;
 import com.banking.cards.application.model.response.TrackingID;
@@ -36,11 +37,10 @@ public class CardsApplicationAPI {
 
     }
 
-    @GetMapping
-    public ResponseEntity<ApiResponse<TrackingResponse>> getApplication(@RequestBody TrackingID trackingID) {
+    @GetMapping("/{trackingId}")
+    public ResponseEntity<ApiResponse<TrackingResponse>> getApplication(@PathVariable("trackingId") String trackingId) {
         return ResponseEntity.ok(ApiResponse.<TrackingResponse>builder()
-                                    .data(this.cardsApplicationService.getApplication(trackingID))
+                                    .data(this.cardsApplicationService.getApplication(trackingId))
                                     .build());
     }
-
 }

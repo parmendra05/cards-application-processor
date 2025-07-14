@@ -35,9 +35,9 @@ public class CardsApplicationServiceImpl implements CardsApplicationService {
         verifyCardDetails(applicationRequest);
         if(verifyIfApplicationAlreadyProcessed(applicationRequest)){
             log.error("Card already processed for user: {} with correlationId: {}", applicationRequest.getPersonalInformation()
-                    .getFullName(), applicationRequest.getPersonalInformation().getCorrelationId());
+                    .getFullName(), applicationRequest.getCorrelationId());
             throw new ResourceNotFoundException("Card already processed for user: "+applicationRequest.getPersonalInformation()
-                    .getFullName() + "with correlation id: "+ applicationRequest.getPersonalInformation().getCorrelationId());
+                    .getFullName() + "with correlation id: "+ applicationRequest.getCorrelationId());
         }
         this.personalInformationRepository.save(CardsApplicationUtility.convertPersonalInformationToPersonalInformationEntity(applicationRequest));
         this.financialInformationRepository.save(CardsApplicationUtility.convertFinancialInformationToFinancialInformationEntity(applicationRequest));
@@ -59,14 +59,14 @@ public class CardsApplicationServiceImpl implements CardsApplicationService {
                 .orElseThrow(() -> {
                         log.error("Card details not found for card id: {} for user: {} with correlationId: {}",
                                 applicationRequest.getCardDetails().getCardId(), applicationRequest.getPersonalInformation()
-                                        .getFullName(), applicationRequest.getPersonalInformation().getCorrelationId());
+                                        .getFullName(), applicationRequest.getCorrelationId());
                      return new ResourceNotFoundException("Card details not found");
                 });
     }
     @Override
-    public TrackingResponse getApplication(TrackingID trackingId) throws ResourceNotFoundException {
+    public TrackingResponse getApplication(String trackingId) throws ResourceNotFoundException {
         PersonalInformationEntity personalInformationEntity = this.personalInformationRepository
-                .findByCorrelationId(trackingId.getTrackingID());
+                .findByCorrelationId(trackingId).get();
         return TrackingResponse.builder()
                 .applicationStatus(personalInformationEntity.getApplicationStatus())
                 .trackingId(personalInformationEntity.getCorrelationId())

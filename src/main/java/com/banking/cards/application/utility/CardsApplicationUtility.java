@@ -18,7 +18,7 @@ public class CardsApplicationUtility {
                 .dateOfBirth(personalInformation.getDateOfBirth())
                 .residentialAddressUDT(convertResidentialAddressToResidentialAddressUDT(personalInformation))
                 .phoneNumbers(convertListOfPhoneNumbersToListOfPhoneNumberUDT(personalInformation))
-                .correlationId(personalInformation.getCorrelationId())
+                .correlationId(applicationRequest.getCorrelationId())
                 .applicationStatus("PENDING")
                 .build();
     }
