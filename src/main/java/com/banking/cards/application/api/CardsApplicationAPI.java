@@ -1,8 +1,5 @@
 package com.banking.cards.application.api;
 
-import com.banking.cards.application.avro.ApplicationDataAvro;
-import com.banking.cards.application.handler.exception.ResourceNotFoundException;
-import com.banking.cards.application.kafka.publisher.CardsApplicationSubmitPublisher;
 import com.banking.cards.application.model.request.ApplicationRequest;
 import com.banking.cards.application.model.response.ApiResponse;
 import com.banking.cards.application.model.response.TrackingID;
@@ -16,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 
 @RestController
 @RequestMapping("v1/card-applications")
@@ -27,12 +22,12 @@ public class CardsApplicationAPI {
 
     private final CardsApplicationService cardsApplicationService;
 
+
     @PostMapping
     public ResponseEntity<ApiResponse<TrackingID>>  createApplication(@RequestBody @Valid ApplicationRequest applicationRequest, HttpServletRequest request) {
         applicationRequest.setCorrelationId((String) request.getAttribute("correlationId"));
         // Write a logger logging about application start process, with user name and correlation
         log.info("Starting application creation process. User: {}, CorrelationId: {}", applicationRequest.getPersonalInformation().getFullName(), applicationRequest.getCorrelationId());
-
         return new ResponseEntity<ApiResponse<TrackingID>>(this.cardsApplicationService.createApplication(applicationRequest), HttpStatus.CREATED);
 
     }

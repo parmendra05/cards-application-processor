@@ -1,6 +1,6 @@
 package com.banking.cards.application.service.impl;
 
-import com.banking.cards.application.avro.ApplicationDataAvro;
+import com.banking.cards.application.avro.ApplicationValidationResultEvent;
 import com.banking.cards.application.entity.PersonalCardKey;
 import com.banking.cards.application.entity.PersonalInformationEntity;
 import com.banking.cards.application.handler.exception.ResourceNotFoundException;
@@ -18,6 +18,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -74,4 +77,33 @@ public class CardsApplicationServiceImpl implements CardsApplicationService {
                 .validationMessages(personalInformationEntity.getComments())
                 .build();
     }
+
+    @Override
+    public void updateApplication(ApplicationValidationResultEvent applicationValidationResultEvent) {
+        String correlationID = applicationValidationResultEvent.getCorrelationID().toString();
+        PersonalInformationEntity personalInformationEntity = getPersonalInformation(applicationValidationResultEvent.getCorrelationID().toString());
+        updateApplicationStatus(personalInformationEntity, applicationValidationResultEvent);
+    }
+
+    private PersonalInformationEntity getPersonalInformation(String correlationID) {
+        return this.personalInformationRepository.findByCorrelationId(correlationID).orElseThrow(() -> {
+            log.error("No personal information found for correlation ID: {}", correlationID);
+            throw new ResourceNotFoundException("No personal information found for correlation ID:"+correlationID);
+        });
+    }
+
+    private void updateApplicationStatus(PersonalInformationEntity personalInformationEntity, ApplicationValidationResultEvent applicationValidationResultEvent) {
+        personalInformationEntity.setApplicationStatus(applicationValidationResultEvent.getApplicationStatus().toString());
+        personalInformationEntity.setComments("APPROVED".equals(applicationValidationResultEvent.getApplicationStatus()) ?
+                 List.of("Credit Card application is approved successfully") :
+                 applicationValidationResultEvent.getValidationMessages()
+                         .stream()
+                         .map(CharSequence::toString)
+                         .toList());
+        this.personalInformationRepository.save(personalInformationEntity);
+        log.info("Successfully updated the application status of user : {} with correlation ID: {}",
+                personalInformationEntity.getFullNameUDT(), applicationValidationResultEvent.getCorrelationID());
+    }
+
+
 }
