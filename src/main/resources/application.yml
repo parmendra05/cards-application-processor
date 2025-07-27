@@ -18,6 +18,16 @@ spring:
         schema:
           registry:
             url: "http://localhost:8081"
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      properties:
+        schema:
+          registry:
+            url: "http://localhost:8081"
+        specific:
+          avro:
+            reader: true
 topics:
   application-submitted-event: vnd_cards_application_submitted_event
   application-validated-event: vnd_cards_application_validated_event
