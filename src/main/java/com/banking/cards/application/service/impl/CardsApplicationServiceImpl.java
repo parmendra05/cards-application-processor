@@ -94,7 +94,7 @@ public class CardsApplicationServiceImpl implements CardsApplicationService {
 
     private void updateApplicationStatus(PersonalInformationEntity personalInformationEntity, ApplicationValidationResultEvent applicationValidationResultEvent) {
         personalInformationEntity.setApplicationStatus(applicationValidationResultEvent.getApplicationStatus().toString());
-        personalInformationEntity.setComments("APPROVED".equals(applicationValidationResultEvent.getApplicationStatus()) ?
+        personalInformationEntity.setComments("APPROVED".equals(applicationValidationResultEvent.getApplicationStatus().toString()) ?
                  List.of("Credit Card application is approved successfully") :
                  applicationValidationResultEvent.getValidationMessages()
                          .stream()
